@@ -1,0 +1,22 @@
+.logo-container {
+    top: 0px;
+    left: 0px;
+    width: 356px;
+    height: 1080px;
+    background: transparent linear-gradient(162deg, #3718B2 0%, #CD33A4 100%) 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+.logo {
+    position: absolute;
+    top: 44px;
+    left: 57px;
+    width: 114px;
+    height: 47px;
+    text-align: left;
+    font: normal normal 900 38px/47px Montserrat;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
