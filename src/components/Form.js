@@ -3,8 +3,9 @@ import "../styles/form.css";
 
 const Form = () => {
   const [enteredAmount, setEnteredAmount] = useState("");
-  const [loanTerm, setLoanTerm] = useState("");
-  // const [selected, setSelected] = useState(false);
+  const [loanTerm, setLoanTerm] = useState();
+  const [selected, setSelected] = useState(false);
+  const [error, setError] = useState();
 
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
@@ -13,18 +14,32 @@ const Form = () => {
 
   const loanTermHandler = (event) => {
     setLoanTerm(event.target.value);
-    // setSelected(true);
+    setSelected(true);
     console.log(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
+    if (!enteredAmount && selected === false) {
+      setError("No information provided!");
+      console.log(error);
+    } else if (!enteredAmount) {
+      setError("Loan amount required!");
+      console.log(error);
+    } else if (selected === false) {
+      setError("Loan term required!");
+      console.log(error);
+    } else {
+      const loanRequest = {
+        Amount: enteredAmount,
+        Term: loanTerm,
+      };
+      console.log(loanRequest);
 
-    const loanRequest = {
-      Amount: enteredAmount,
-      Term: loanTerm,
-    };
-    console.log(loanRequest);
+      setEnteredAmount("");
+      setLoanTerm("");
+      setSelected(false);
+    }
   };
 
   return (
