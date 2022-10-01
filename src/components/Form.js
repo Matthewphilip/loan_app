@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ErrorModal from "./ErrorModal/ErrorModal";
+import SuccessModal from "./SuccessModal/SuccessModal";
 import "../styles/form.css";
 
 const Form = () => {
@@ -6,6 +8,8 @@ const Form = () => {
   const [loanTerm, setLoanTerm] = useState();
   const [selected, setSelected] = useState(false);
   const [error, setError] = useState();
+  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
+  const [success, setSuccess] = useState();
 
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
@@ -21,20 +25,41 @@ const Form = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (!enteredAmount && selected === false) {
-      setError("No information provided!");
+      setError({
+        title: "Error!",
+        message: "You have empty fields!",
+      });
       console.log(error);
     } else if (!enteredAmount) {
-      setError("Loan amount required!");
+      setError({
+        title: "Error!",
+        message: "Please enter a loan amount.",
+      });
       console.log(error);
     } else if (selected === false) {
-      setError("Loan term required!");
+      setError({
+        title: "Error!",
+        message: "Please enter a loan term.",
+      });
       console.log(error);
     } else {
-      const loanRequest = {
+      setSuccessfulSubmit(true);
+      setSuccess({
+        title: "Thank You!",
+        message: `Your loan request for £${enteredAmount} on a ${loanTerm} month term has been recieved.`,
+      });
+
+      const individualRequest = {
         Amount: enteredAmount,
         Term: loanTerm,
       };
-      console.log(loanRequest);
+
+      const loanRequestLog = [];
+
+      loanRequestLog.push(individualRequest);
+
+      console.log(individualRequest);
+      console.log(loanRequestLog);
 
       setEnteredAmount("");
       setLoanTerm("");
@@ -42,33 +67,60 @@ const Form = () => {
     }
   };
 
+  const errorHandler = () => {
+    setError(null);
+  };
+
+  const successHandler = () => {
+    setSuccess(null);
+  };
+
   return (
-    <form className="form-container" onSubmit={submitHandler}>
-      <h3 className="form-title">Apply for a loan now 👍</h3>
-      <div className="loan-amount">
-        <label>Loan amount</label>
-        <input
-          type="number"
-          value={enteredAmount}
-          onChange={amountChangeHandler}
+    <>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
         />
-        <label>Loan term (months)</label>
-        <div className="button-container">
-          <button type="button" onClick={loanTermHandler} value="12">
-            12
-          </button>
-          <button type="button" onClick={loanTermHandler} value="18">
-            18
-          </button>
-          <button type="button" onClick={loanTermHandler} value="24">
-            24
+      )}
+      {success && (
+        <SuccessModal
+          title={success.title}
+          message={success.message}
+          onConfirm={successHandler}
+        />
+      )}
+      <form className="form-container" onSubmit={submitHandler}>
+        <h3 className="form-title">Apply for a loan now 👍</h3>
+        <div className="loan-amount">
+          <label htmlFor="amount">Loan amount</label>
+          <span className="input-symbol-euro">
+            <input
+              id="amount"
+              type="number"
+              value={enteredAmount}
+              onChange={amountChangeHandler}
+            />
+          </span>
+          <label>Loan term (months)</label>
+          <div className="button-container">
+            <button type="button" onClick={loanTermHandler} value="12">
+              12
+            </button>
+            <button type="button" onClick={loanTermHandler} value="18">
+              18
+            </button>
+            <button type="button" onClick={loanTermHandler} value="24">
+              24
+            </button>
+          </div>
+          <button className="submit-button" type="submit">
+            Submit
           </button>
         </div>
-        <button className="submit-button" type="submit">
-          Submit
-        </button>
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
 
