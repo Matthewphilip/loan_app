@@ -1,9 +1,9 @@
 import React from "react";
-import "../styles/logo.css";
+import "../styles/bar.css";
 
 const Logo = () => {
   return (
-    <div className="logo-container">
+    <div className="bar-container">
       <h1 className="logo">Logo.</h1>
     </div>
   );
