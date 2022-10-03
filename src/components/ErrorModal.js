@@ -1,7 +1,7 @@
 import React from "react";
-import "../ErrorModal/errormodal.css";
+import "../styles/modal.css";
 
-const SuccessModal = (props) => {
+const ErrorModal = (props) => {
   return (
     <div>
       <div className="backdrop" onClick={props.onConfirm} />
@@ -13,11 +13,13 @@ const SuccessModal = (props) => {
           <p>{props.message}</p>
         </div>
         <footer className="actions">
-          <button onClick={props.onConfirm}>Close</button>
+          <button className="close-button" onClick={props.onConfirm}>
+            Close
+          </button>
         </footer>
       </div>
     </div>
   );
 };
 
-export default SuccessModal;
+export default ErrorModal;

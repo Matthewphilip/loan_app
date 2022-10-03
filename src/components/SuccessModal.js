@@ -1,7 +1,7 @@
 import React from "react";
-import "../ErrorModal/errormodal.css";
+import "../styles/modal.css";
 
-const ErrorModal = (props) => {
+const SuccessModal = (props) => {
   return (
     <div>
       <div className="backdrop" onClick={props.onConfirm} />
@@ -22,4 +22,4 @@ const ErrorModal = (props) => {
   );
 };
 
-export default ErrorModal;
+export default SuccessModal;

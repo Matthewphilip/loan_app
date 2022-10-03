@@ -1,31 +1,36 @@
 import React, { useState } from "react";
-import ErrorModal from "./ErrorModal/ErrorModal";
-import SuccessModal from "./SuccessModal/SuccessModal";
+import ErrorModal from "./ErrorModal";
+import SuccessModal from "./SuccessModal";
 import "../styles/form.css";
 
 const Form = () => {
   const [enteredAmount, setEnteredAmount] = useState("");
-  const [loanTerm, setLoanTerm] = useState();
-  const [selected, setSelected] = useState(false);
-  const [error, setError] = useState();
-  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
-  const [success, setSuccess] = useState();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [activeTerm, setActiveTerm] = useState("");
+  const [terms, setTerms] = useState([
+    {
+      id: 12,
+      months: 12,
+    },
+    {
+      id: 18,
+      months: 18,
+    },
+    {
+      id: 24,
+      months: 24,
+    },
+  ]);
 
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
     console.log(event.target.value);
   };
 
-  const loanTermHandler = (event) => {
-    setLoanTerm(event.target.value);
-    setSelected(true);
-    console.log(event.target.value);
-    // event.target.style.backgroundColor = "purple";
-  };
-
   const submitHandler = (event) => {
     event.preventDefault();
-    if (!enteredAmount && selected === false) {
+    if (!enteredAmount && !activeTerm) {
       setError({
         title: "Error!",
         message:
@@ -38,35 +43,37 @@ const Form = () => {
         message: "Please enter a loan amount.",
       });
       console.log(error);
-    } else if (selected === false) {
+    } else if (!activeTerm) {
       setError({
         title: "Error!",
-        message: "Please enter a loan term.",
+        message: "Please select a loan term.",
       });
       console.log(error);
-    } else {
-      setSuccessfulSubmit(true);
+    } else
       setSuccess({
         title: "Thank You!",
-        message: `Your loan request for £${enteredAmount} on a ${loanTerm} month term has been received.`,
+        message: `Your loan request for £${enteredAmount} on a ${activeTerm} month term has been received.`,
       });
 
-      const individualRequest = {
-        Amount: enteredAmount,
-        Term: loanTerm,
-      };
+    console.log(success);
 
-      const loanRequestLog = [];
+    const loanRequestLog = [];
 
-      loanRequestLog.push(individualRequest);
+    const dataStorage = () => {
+      if (enteredAmount && activeTerm) {
+        const individualRequest = {
+          Amount: enteredAmount,
+          Term: activeTerm,
+        };
+        console.log(individualRequest);
 
-      console.log(individualRequest);
-      console.log(loanRequestLog);
+        return loanRequestLog.push(individualRequest);
+      }
+    };
 
-      setEnteredAmount("");
-      setLoanTerm("");
-      setSelected(false);
-    }
+    console.log(loanRequestLog);
+    setEnteredAmount("");
+    setActiveTerm("");
   };
 
   const errorHandler = () => {
@@ -109,15 +116,20 @@ const Form = () => {
           </span>
           <label className="loan-term-label">Loan term (months)</label>
           <div className="button-container">
-            <button type="button" onClick={loanTermHandler} value="12">
-              12
-            </button>
-            <button type="button" onClick={loanTermHandler} value="18">
-              18
-            </button>
-            <button type="button" onClick={loanTermHandler} value="24">
-              24
-            </button>
+            {terms.map((term) => {
+              return (
+                <button
+                  className={
+                    activeTerm === term.id ? "button-active" : "button-inactive"
+                  }
+                  type="button"
+                  key={term.id}
+                  onClick={() => setActiveTerm(term.months)}
+                >
+                  {term.months}
+                </button>
+              );
+            })}
           </div>
           <button className="submit-button" type="submit">
             Submit

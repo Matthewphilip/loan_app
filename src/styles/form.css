@@ -41,7 +41,7 @@
     height: 77px;
     max-width: 100%;
     margin-bottom: 50px;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .input-symbol-euro {
@@ -56,8 +56,8 @@
     position: absolute;
     content:"£";
     font-weight: 700;
-    left: 5px;
-    top: -12px;
+    left: 10px;
+    top: -15px;
     font-size: 35px;
 }
 
@@ -68,7 +68,7 @@
     margin-bottom: 50px;
 }
 
-.button-container button {
+.button-inactive {
     width: 250px;
     height: 77px;
     font-size: 25px;
@@ -80,8 +80,22 @@
     cursor: pointer;
 }
 
+.button-active {
+    width: 250px;
+    height: 77px;
+    font-size: 25px;
+    font-weight: 700;
+    color: white;
+    background: rgb(119, 0, 255) 0% 0% no-repeat padding-box;
+    border: 1px solid #CBCBCB;
+    border-radius: 5px;
+    opacity: 1;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
 .submit-button {
-    background-color: #7600FF;
+    background-color: rgb(119, 0, 255);
     width: 100%;
     height: 77px;
     border: 1px solid #CBCBCB;
@@ -131,6 +145,7 @@
         width: 302px;
         height: 60px;
         margin-bottom: 37px;
+        font-size: 20px;
     }
 
     .input-symbol-euro:before {
