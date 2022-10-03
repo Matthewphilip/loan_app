@@ -1,7 +1,5 @@
 .bar-container {
-    position:relative;
-    top: 0px;
-    left: 0px;
+    position: relative;
     width: 356px;
     height: auto;
     background: transparent linear-gradient(162deg, #3718B2 0%, #CD33A4 100%) 0% 0% no-repeat padding-box;
@@ -15,9 +13,24 @@
     width: 114px;
     height: 47px;
     text-align: left;
-    font: normal normal 900 38px/47px Montserrat;
     letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;
+    font-size: 38px;
+    font-weight: 900;
 }
 
+@media (max-width: 400px) {
+    .bar-container {
+    width: auto;
+    height: 51px;
+    }
+
+    .logo {
+    top: -3px;
+    left: 18px;
+    width: 66px;
+    height: 27px;
+    font-size: 22px;
+    }
+}

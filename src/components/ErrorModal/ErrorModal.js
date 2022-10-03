@@ -13,7 +13,9 @@ const ErrorModal = (props) => {
           <p>{props.message}</p>
         </div>
         <footer className="actions">
-          <button onClick={props.onConfirm}>Close</button>
+          <button className="close-button" onClick={props.onConfirm}>
+            Close
+          </button>
         </footer>
       </div>
     </div>

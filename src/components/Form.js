@@ -20,6 +20,7 @@ const Form = () => {
     setLoanTerm(event.target.value);
     setSelected(true);
     console.log(event.target.value);
+    // event.target.style.backgroundColor = "purple";
   };
 
   const submitHandler = (event) => {
@@ -27,7 +28,8 @@ const Form = () => {
     if (!enteredAmount && selected === false) {
       setError({
         title: "Error!",
-        message: "You have empty fields!",
+        message:
+          "You have empty fields, please enter all required details and resubmit.",
       });
       console.log(error);
     } else if (!enteredAmount) {
@@ -46,7 +48,7 @@ const Form = () => {
       setSuccessfulSubmit(true);
       setSuccess({
         title: "Thank You!",
-        message: `Your loan request for £${enteredAmount} on a ${loanTerm} month term has been recieved.`,
+        message: `Your loan request for £${enteredAmount} on a ${loanTerm} month term has been received.`,
       });
 
       const individualRequest = {
@@ -94,7 +96,9 @@ const Form = () => {
       <form className="form-container" onSubmit={submitHandler}>
         <h3 className="form-title">Apply for a loan now 👍</h3>
         <div className="loan-amount">
-          <label htmlFor="amount">Loan amount</label>
+          <label className="loan-amount-label" htmlFor="amount">
+            Loan amount
+          </label>
           <span className="input-symbol-euro">
             <input
               id="amount"
@@ -103,7 +107,7 @@ const Form = () => {
               onChange={amountChangeHandler}
             />
           </span>
-          <label>Loan term (months)</label>
+          <label className="loan-term-label">Loan term (months)</label>
           <div className="button-container">
             <button type="button" onClick={loanTermHandler} value="12">
               12
