@@ -37,16 +37,16 @@ const Form = () => {
           "You have empty fields, please enter all required details and resubmit.",
       });
       console.log(error);
-    } else if (!enteredAmount) {
+    } else if (!enteredAmount || enteredAmount < 1) {
       setError({
         title: "Error!",
-        message: "Please enter a loan amount.",
+        message: "Please enter a valid loan amount (>0).",
       });
       console.log(error);
     } else if (!activeTerm) {
       setError({
         title: "Error!",
-        message: "Please select a loan term.",
+        message: "Please select a loan repayment term.",
       });
       console.log(error);
     } else
